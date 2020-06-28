@@ -4,5 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+ <ItemGroup>
+    <ProjectReference Include="..\demo.Domain\demo.Domain.csproj" />
+     <ProjectReference Include="..\demo.Data\demo.Data.csproj" />
+</ItemGroup>
+ 
 </Project>
