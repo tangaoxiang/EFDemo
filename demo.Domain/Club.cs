@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-namespace demo.Domain{
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace demo.Domain {
     /// <summary>
     /// 俱乐部
     /// </summary>
-    public class Club{
-        public Club(){
-            Players = new List<Player>();
+    public class Club {
+        public Club () {
+            Players = new List<Player> ();
         }
 
         public int Id { get; set; }
@@ -16,6 +18,7 @@ namespace demo.Domain{
         /// 成立时间
         /// </summary>
         /// <value></value>
+        [Column (TypeName = "date")]
         public DateTime DateOfEstablishment { get; set; }
         public string History { get; set; }
         /// <summary>

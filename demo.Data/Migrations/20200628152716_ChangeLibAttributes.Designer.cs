@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using demo.Data;
 
 namespace demo.Data.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    partial class DemoContextModelSnapshot : ModelSnapshot
+    [Migration("20200628152716_ChangeLibAttributes")]
+    partial class ChangeLibAttributes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,38 +45,6 @@ namespace demo.Data.Migrations
                     b.HasIndex("LeagueId");
 
                     b.ToTable("Clubs");
-                });
-
-            modelBuilder.Entity("demo.Domain.Game", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Round")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset?>("StartTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Game");
-                });
-
-            modelBuilder.Entity("demo.Domain.GamePlayer", b =>
-                {
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PlayerId", "GameId");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("GamePlayer");
                 });
 
             modelBuilder.Entity("demo.Domain.League", b =>
@@ -125,21 +95,6 @@ namespace demo.Data.Migrations
                     b.HasOne("demo.Domain.League", "League")
                         .WithMany()
                         .HasForeignKey("LeagueId");
-                });
-
-            modelBuilder.Entity("demo.Domain.GamePlayer", b =>
-                {
-                    b.HasOne("demo.Domain.Game", "Game")
-                        .WithMany("GamePlayers")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("demo.Domain.Player", "Player")
-                        .WithMany("GamePlayers")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("demo.Domain.Player", b =>
