@@ -9,8 +9,8 @@ using demo.Data;
 namespace demo.Data.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    [Migration("20200628162431_AddGame")]
-    partial class AddGame
+    [Migration("20200630183022_AddView")]
+    partial class AddView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,11 +115,34 @@ namespace demo.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClubId");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("demo.Domain.Resume", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("Resumes");
                 });
 
             modelBuilder.Entity("demo.Domain.Club", b =>
@@ -149,6 +172,15 @@ namespace demo.Data.Migrations
                     b.HasOne("demo.Domain.Club", null)
                         .WithMany("Players")
                         .HasForeignKey("ClubId");
+                });
+
+            modelBuilder.Entity("demo.Domain.Resume", b =>
+                {
+                    b.HasOne("demo.Domain.Player", "Player")
+                        .WithOne("Resume")
+                        .HasForeignKey("demo.Domain.Resume", "PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

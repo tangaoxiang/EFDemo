@@ -9,8 +9,8 @@ using demo.Data;
 namespace demo.Data.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    [Migration("20200629091730_OneToOne2.sql")]
-    partial class OneToOne2sql
+    [Migration("20200630182923_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,7 +142,7 @@ namespace demo.Data.Migrations
                     b.HasIndex("PlayerId")
                         .IsUnique();
 
-                    b.ToTable("Resume");
+                    b.ToTable("Resumes");
                 });
 
             modelBuilder.Entity("demo.Domain.Club", b =>

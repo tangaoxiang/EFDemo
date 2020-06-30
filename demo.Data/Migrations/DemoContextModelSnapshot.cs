@@ -140,7 +140,7 @@ namespace demo.Data.Migrations
                     b.HasIndex("PlayerId")
                         .IsUnique();
 
-                    b.ToTable("Resume");
+                    b.ToTable("Resumes");
                 });
 
             modelBuilder.Entity("demo.Domain.Club", b =>

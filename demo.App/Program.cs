@@ -38,24 +38,45 @@ namespace demo.App {
             #endregion
 
             #region demo3 多表关联查询
-            var clubs = context.Clubs.Where (c => c.Id > 0)
-                .Include (c => c.League)
-                .Include (c => c.Players).ThenInclude (p => p.Resume)
-                .Include (c => c.Players)
-                .ThenInclude (p => p.GamePlayers).ThenInclude (g => g.Game)
-                .FirstOrDefault ();
+            // var clubs = context.Clubs.Where (c => c.Id > 0)
+            //     .Include (c => c.League)
+            //     .Include (c => c.Players).ThenInclude (p => p.Resume)
+            //     .Include (c => c.Players)
+            //     .ThenInclude (p => p.GamePlayers).ThenInclude (g => g.Game)
+            //     .FirstOrDefault ();
             #endregion
 
             #region demo4 多表关联查询，子查询 
-            var result = context.Clubs.Where (c => c.Id > 0)
-                .Select (c => new {//context不能追踪匿名类
-                    Id = c.Id,
-                        LeagueName = c.League.Name,
-                        Name = c.Name,
-                        players = c.Players.Where (p => p.DateOfBirth > new DateTime (1990, 1, 1))
-                }).ToList();
+            // var result = context.Clubs.Where (c => c.Id > 0)
+            //     .Select (c => new {//context不能追踪匿名类
+            //         Id = c.Id,
+            //             LeagueName = c.League.Name,
+            //             Name = c.Name,
+            //             players = c.Players.Where (p => p.DateOfBirth > new DateTime (1990, 1, 1))
+            //     }).ToList();
             #endregion
 
+            //demo 5 修改关联表数据
+            // var player = context.Players.First ();
+            // //新增关联表数据
+            // player.Resume = new Resume {
+            //     Description = "99999"
+            // };
+            // // var resume = context.Resumes.Where (x => x.PlayerId == player.Id).First ();
+            // resume.Description = "333";
+            // 对关联表数据进行修改
+            // var player = context.Players.Include (x => x.Resume).First ();
+            // player.Resume = new Resume {
+            //     Description = "777"
+            // };
+            //  context.SaveChanges ();
+
+            // var player = context.PlayerClubs.First();
+
+            var leagus = context.Leagues.FromSqlRaw($"select * from leagues").ToList();
+            foreach(var i in leagus){
+                System.Console.WriteLine(i.Name);
+            }
         }
     }
 }

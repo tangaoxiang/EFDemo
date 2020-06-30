@@ -9,8 +9,8 @@ using demo.Data;
 namespace demo.Data.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    [Migration("20200629091416_OneToOne.sql")]
-    partial class OneToOnesql
+    [Migration("20200630190353_AddView1")]
+    partial class AddView1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,6 +115,9 @@ namespace demo.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClubId");
@@ -139,7 +142,7 @@ namespace demo.Data.Migrations
                     b.HasIndex("PlayerId")
                         .IsUnique();
 
-                    b.ToTable("Resume");
+                    b.ToTable("Resumes");
                 });
 
             modelBuilder.Entity("demo.Domain.Club", b =>
