@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace demo.Domain {
     /// <summary>
-    /// 俱乐部
+    /// 球队
     /// </summary>
     public class Club {
         public Club () {

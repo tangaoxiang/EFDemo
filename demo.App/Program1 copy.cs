@@ -8,7 +8,7 @@ namespace demo.App {
     /// 演练Linq to object 查询原理
     /// </summary>
     class Program1 {
-        static void Main (string[] args) {
+        static void Main1 (string[] args) {
             List<student> students = new List<student> ();
             students.AddRange (new student[] {
                 new student { ID = 1, Name = "aa" }, new student { ID = 2, Name = "bb" }
